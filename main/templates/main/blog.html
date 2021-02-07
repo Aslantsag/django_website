@@ -1,0 +1,76 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Блог
+{% endblock %}
+
+{% block content %}
+    <div class="blog-sendpost">
+        <div class="blog-top">
+            <div class="blog-sendpost-btnbox">
+                <button class="send-post__btn btn-1">
+                    <span>Предложить статью</span>
+                    <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="blog-searchbox">
+                <form method="get">
+                    <input class="blog-searchbox__intext" name="search" type="search" value="{{ search_query }}" placeholder="Найти пост">
+                    <button class="blog-search__btn btn-1">Найти</button>
+                </form>
+            </div>
+        </div>
+        <div class="blog-sendpost-form" hidden>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.image }}
+                {{ form.title }}
+                {{ form.slug }}
+                {{ form.text }}
+                <button type="submit" class="btn-1">Отправить</button>
+            </form>
+        </div>
+    </div>
+{% if page_obj %}
+    {% for post in page_obj %}
+    <div class="blog-post clr">
+        <div class="blog-post-img left">
+            <img src="{{ post.image.url }}" width="250" alt="{{ post.title }}">
+        </div>
+        <div class="blog-post-body right">
+            <a href="/blog/{{ post.slug }}" class="blog-post__title">{{ post.title }}</a>
+            <div class="blog-post__text">{{ post.text|truncatechars:410 }}</div>
+        </div>
+    </div>
+    {% endfor %}
+    {% if page_obj.paginator.num_pages > 1 %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">
+                    <i class="fa fa-backward" aria-hidden="true"></i>
+                </a>
+                <a class="pagination-caret" href="?page={{ page_obj.previous_page_number }}">
+                    <i class="fa fa-caret-left" aria-hidden="true"></i>
+                </a>
+            {% endif %}
+
+            <span class="pagination__current">
+                {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a class="pagination-caret" href="?page={{ page_obj.next_page_number }}">
+                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                </a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">
+                    <i class="fa fa-forward" aria-hidden="true"></i>
+                </a>
+            {% endif %}
+        </span>
+    </div>
+    {% endif %}
+{% else %}
+    <div class="no-posts">Пусто</div>
+{% endif %}
+{% endblock %}

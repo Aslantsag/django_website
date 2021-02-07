@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ site_config.site_name }}
+{% endblock %}
+{% block content %}
+{% if partners %}
+<section id="partners">
+    <div class="wrap">
+        <div class="section__title">Нам доверяют</div>
+        <div class="section-box">
+        {% for partner in partners %}
+            <img class="partners" src="{{ partner.logo.url }}" width="200" alt="partners">
+        {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% if services %}
+<section id="services">
+    <div class="wrap">
+        <div class="section__title">Наши услуги</div>
+        <div class="section-box">
+            {% for service in services %}
+            <div class="service-box-item">
+                <img class="service-box-item__img" src="{{ service.img.url }}" width="120" alt="services">
+                <div class="service-box-item__title">{{ service.title }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

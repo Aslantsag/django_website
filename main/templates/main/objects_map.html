@@ -1,0 +1,49 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}
+Карта всех рекламных поверхностей
+{% endblock %}
+{% block content %}
+<div class="wrap">
+    <div class="map-box">
+        <div class="map__title">Карта всех рекламных поверхностей</div>
+        <div class="map-markers">
+            <div class="map-markers__mark">
+                <img src="{% static 'images/icons/marker1.png' %}">
+                <span class="val">Билборды</span>
+            </div>
+            <div class="map-markers__mark">
+                <img src="{% static 'images/icons/marker2.png' %}">
+                <span class="val">Видеостойки</span>
+            </div>
+            <div class="map-markers__mark">
+                <img src="{% static 'images/icons/marker3.png' %}">
+                <span class="val">LED-экран</span>
+            </div>
+            <div class="map-markers__mark">
+                <img src="{% static 'images/icons/marker4.png' %}">
+                <span class="val">Сити-форматы</span>
+            </div>
+        </div>
+        <iframe class="map_frame" src="{{ site_config.map_html1 }}" width="90%" height="400" frameborder="0"></iframe>
+        <div class="map-markers-info">
+            <div class="map-markers__mark">
+                <img src="{% static 'images/icons/marker1.png' %}">
+                <span class="val">Билборд - транспарант или освещенный изнутри стеклянный короб для уличной рекламы.</span>
+            </div>
+            <div class="map-markers__mark">
+                <img src="{% static 'images/icons/marker2.png' %}">
+                <span class="val">Видеостойка - это напольная рекламная конструкция, оснащенная LED-монитором на уровне глаз и встроенной стереосистемой.</span>
+            </div>
+            <div class="map-markers__mark">
+                <img src="{% static 'images/icons/marker3.png' %}">
+                <span class="val">LED-экран – экран в центре города, на котором по кругу показывают вашу видео-рекламу или статичную картинку.</span>
+            </div>
+            <div class="map-markers__mark">
+                <img src="{% static 'images/icons/marker4.png' %}">
+                <span class="val">Сити-формат — функциональный и современный вид рекламных конструкций, который отлично вписывается в городской<br> ландшафт и является эффективным средством размещения.</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

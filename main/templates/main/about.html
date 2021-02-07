@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+О компании
+{% endblock %}
+{% block content %}
+<div class="content__title">{{ site_config.about_title }}</div>
+<div class="about__text">{{ site_config.about_text }}</div>
+{% if partners %}
+<div class="about-portfolio">
+    <div class="about-portfolio__title content__title">Наши клиенты</div>
+    <div class="about-portfolio-box">
+        {% for partner in partners %}
+            <img class="partners" src="{{ partner.logo.url }}" width="150" alt="partners">
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+<div class="about-feedback">
+    <div class="about-feedback__title content__title">Оставте заявку</div>
+    <div class="about-feedback-form">
+        <form id="feedback-form" method="POST">
+            <div class="about-feedback_intext-box clr">
+                {% csrf_token %}
+                {{ form.user_name }}
+                {{ form.user_phone }}
+            </div>
+            {{ form.message }}
+            <button class="about-feedback__btn" name="send">Отправить</button>
+            <div class="about-feedback__text">Нажимая на кнопку вы даете согласие на обработку персональных данных</div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Портфолио
+{% endblock %}
+{% block content %}
+{% if portfolio %}
+    {% for portf in portfolio %}
+    <div class="portfolio">
+        <div class="portfolio-item clr">
+            <div class="portfolio-item-body">
+                <div class="portfolio-item__company">{{ portf.title }}</div>
+                <div class="portfolio-item__title">{{ portf.descr }}</div>
+                <a href="/portfolio/{{ portf.id }}" class="portfolio-item__more">Подробнее</a>
+            </div>
+            <div class="portfolio-item-img">
+                <img src="{{ portf.image.url }}" alt="{{ portf.title }}">
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+<div class="no-portfolio">Портфолио пока не добавлено!</div>
+{% endif %}
+{% endblock %}

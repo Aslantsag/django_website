@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
+{% block content %}
+<div class="blog-post post">
+    <div class="blog-post-img single">
+        <img src="{{ post.image.url }}" alt="{{ post.title }}">
+    </div>
+    <div class="blog-post__title">{{ post.title }}</div>
+    <div class="blog-post__text">{{ post.text }}</div>
+    <div class="clr"></div>
+    <div class="blog-post__date">Дата публикции: {{ post.date }}</div>
+</div>
+<div class="clr"></div>
+<div class="blog-commnets">
+    <div class="blog-commnets__title">Добавить комментарий</div>
+    <form action="{% url 'add_comment' post.slug %}" method="post">
+        {% csrf_token %}
+        {{ comments_form.author }}
+        {{ comments_form.text }}
+        <button class="btn-1">Отправить</button>
+    </form>
+</div>
+{% if comments %}
+<div class="blog-comments">
+    {% for comment in comments %}
+    <div class="blog-comments-item">
+        <div class="blog-comments__author">{{ comment.author }}</div>
+        <div class="blog-comments__text">{{ comment.text }}</div>
+        <div class="blog-comments__date">{{ comment.date }}</div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
