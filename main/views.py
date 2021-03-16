@@ -1,11 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from . models import SiteConfig
 from django.contrib import messages
-from . models import Blog
-from . models import Comments
-from . models import Partners
-from . models import Services
-from . models import Portfolio
+from . models import *
 from . forms import *
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.mail import send_mail, BadHeaderError
